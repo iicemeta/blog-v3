@@ -16,12 +16,12 @@
           "value": "application/xml"
         }
       ],
-      "source": "/zhilu.opml"
+      "source": "/feed.xml"
     }
   ],
   "redirects": [
     {
-      "destination": "https://www.zhilu.site/api/icon",
+      "destination": "/images/favicon.svg",
       "source": "/favicon.ico",
       "status": 308
     }

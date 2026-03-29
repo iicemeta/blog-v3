@@ -14,7 +14,7 @@ const builder = new XmlBuilder({
 function mapEntry(item: FeedEntry) {
 	return {
 		$text: item.title || item.sitenick || item.author,
-		$type: 'rss',
+$type: 'rss',
 		$xmlUrl: item.feed,
 		$created: toZonedTemporal(item.date).toInstant().toString(),
 		$description: item.desc,
