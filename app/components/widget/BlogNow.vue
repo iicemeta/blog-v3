@@ -103,15 +103,19 @@ const statusText = computed(() => {
 	class="blog-now"
 	:style="{ '--time-bg': currentSlot?.bgGradient ?? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }"
 >
-	<div class="time-display">
-		{{ currentTime }}
-	</div>
-
-	<div class="greeting-section">
-		<div class="greeting-text">{{ randomGreeting }}</div>
-		<div class="status-badge">
-			<span class="status-dot" />
-			{{ statusText }}
+	<div class="now-content">
+		<div class="greeting-section">
+			<div class="greeting-text">
+				<span class="greeting-emoji">{{ currentSlot?.emoji ?? '🌙' }}</span>
+				{{ randomGreeting }}
+			</div>
+			<div class="status-badge">
+				<span class="status-dot" />
+				{{ statusText }}
+			</div>
+		</div>
+		<div class="time-display">
+			{{ currentTime }}
 		</div>
 	</div>
 </BlogWidget>
@@ -133,37 +137,22 @@ const statusText = computed(() => {
 		transition: background 0.5s ease;
 	}
 
-	.time-display {
-		position: absolute;
-		right: 0.75rem;
-		top: 50%;
-		transform: translateY(-50%);
-		font-size: 2.5rem;
-		font-weight: 800;
-		font-variant-numeric: tabular-nums;
-		letter-spacing: -0.02em;
-		background-clip: text;
-		background-image: linear-gradient(
-			60deg,
-			var(--c-accent) -30%,
-			var(--c-primary),
-			var(--c-text-1)
-		);
-		background-position: 100% 0;
-		background-size: 200%;
-		color: transparent;
-		transition: background-position 0.2s;
-		z-index: 1;
-
-		.blog-widget:hover & {
-			background-position: 0 0;
-		}
+	.now-content {
+		display: flex;
+		align-items: center;
+		min-height: 4rem;
 	}
 
 	.greeting-section {
-		position: relative;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		z-index: 1;
-		padding-right: 5rem;
+	}
+
+	.greeting-emoji {
+		margin-right: 0.3rem;
 	}
 
 	.greeting-text {
@@ -191,6 +180,33 @@ const statusText = computed(() => {
 		border-radius: 50%;
 		background: #22c55e;
 		animation: pulse 2s ease-in-out infinite;
+	}
+
+	.time-display {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		align-self: stretch;
+		font-size: 2.8rem;
+		font-weight: 800;
+		font-variant-numeric: tabular-nums;
+		letter-spacing: -0.02em;
+		background-clip: text;
+		background-image: linear-gradient(
+			60deg,
+			var(--c-accent) -30%,
+			var(--c-primary) 50%,
+			var(--c-accent) 130%
+		);
+		background-position: 100% 0;
+		background-size: 200%;
+		color: transparent;
+		transition: background-position 0.2s;
+		z-index: 1;
+
+		.blog-widget:hover & {
+			background-position: 0 0;
+		}
 	}
 }
 
