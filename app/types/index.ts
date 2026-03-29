@@ -1,14 +1,7 @@
 declare global {
 	interface Window {
-		twikoo?: {
-			init: (options: {
-				envId: string
-				el: string
-				region?: string
-				path?: string
-				lang?: string
-			}) => void
-			version: string
-		}
+		// Giscus 不需要全局类型定义
 	}
 }
+
+export {}

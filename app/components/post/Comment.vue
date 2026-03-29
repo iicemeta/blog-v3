@@ -1,7 +1,9 @@
 <script setup lang="tsx">
 import type { TippyComponent } from 'vue-tippy'
+import Giscus from '@giscus/vue'
 
 const appConfig = useAppConfig()
+const colorMode = useColorMode()
 
 const commentEl = useTemplateRef('comment')
 const popoverEl = useTemplateRef<TippyComponent>('popover')
@@ -15,9 +17,6 @@ const popoverBind = ref<TippyComponent['$props']>({})
 useEventListener(commentEl, 'click', (e) => {
 	if (!(e.target instanceof Element))
 		return
-
-	if (e.target.matches('.tk-avatar-img'))
-		e.stopPropagation()
 
 	const popoverTarget = e.target.closest('a[target="_blank"]')
 	if (!(popoverTarget instanceof HTMLAnchorElement))
@@ -51,12 +50,34 @@ function confirmOpen() {
 	window.open(popoverInputEl.value?.textContent, '_blank')
 }
 
-onMounted(() => {
-	window.twikoo?.init?.({
-		envId: appConfig.twikoo?.envId,
-		// twikoo 会把挂载后的元素变为 #twikoo
-		el: '#twikoo',
-	})
+// Giscus 主题映射
+// 支持 'light' | 'dark' | 'preferred_color_scheme' | 'light_high_contrast' | 'dark_high_contrast' | 'light_protanopia' | 'dark_protanopia' | 'light_tritanopia' | 'dark_tritanopia' | 'custom'
+const giscusTheme = computed(() => {
+	// 如果配置为 preferred_color_scheme，根据当前模式返回 light 或 dark
+	const cfgTheme = appConfig.giscus?.theme || 'preferred_color_scheme'
+	if (cfgTheme === 'preferred_color_scheme') {
+		return colorMode.value === 'dark' ? 'dark' : 'light'
+	}
+	return cfgTheme
+})
+
+// Giscus 配置
+const giscusConfig = computed(() => {
+	const cfg = appConfig.giscus
+	if (!cfg) return null
+	return {
+		repo: cfg.repo || '',
+		repoId: cfg.repoId || '',
+		category: cfg.category || 'Announcements',
+		categoryId: cfg.categoryId || '',
+		mapping: cfg.mapping || 'pathname',
+		strict: cfg.strict || '0',
+		reactionsEnabled: cfg.reactionsEnabled || '1',
+		emitMetadata: cfg.emitMetadata || '0',
+		inputPosition: cfg.inputPosition || 'bottom',
+		lang: cfg.lang || 'zh-CN',
+		loading: cfg.loading || 'lazy',
+	}
 })
 </script>
 
@@ -104,9 +125,26 @@ onMounted(() => {
 		</template>
 	</Tooltip>
 
-	<div id="twikoo">
-		<p>评论加载中...</p>
-	</div>
+	<!-- Giscus 评论系统 -->
+	<ClientOnly>
+		<div id="giscus" class="giscus-container">
+			<Giscus
+				v-if="giscusConfig"
+				:repo="giscusConfig.repo"
+				:repo-id="giscusConfig.repoId"
+				:category="giscusConfig.category"
+				:category-id="giscusConfig.categoryId"
+				:mapping="giscusConfig.mapping"
+				:strict="giscusConfig.strict"
+				:reactions-enabled="giscusConfig.reactionsEnabled"
+				:emit-metadata="giscusConfig.emitMetadata"
+				:input-position="giscusConfig.inputPosition"
+				:theme="giscusTheme"
+				:lang="giscusConfig.lang"
+				:loading="giscusConfig.loading"
+			/>
+		</div>
+	</ClientOnly>
 </section>
 </template>
 
@@ -143,106 +181,8 @@ onMounted(() => {
 	}
 }
 
-:deep(#twikoo) {
+.giscus-container {
 	margin: 2em 0;
-
-	.tk-admin-container {
-		position: fixed;
-		z-index: calc(var(--z-index-popover) + 1);
-	}
-
-	.tk-input {
-		font-family: var(--font-monospace);
-	}
-
-	.tk-avatar {
-		border-radius: 50%;
-
-		@supports (corner-shape: squircle) {
-			corner-shape: superellipse(1.2);
-		}
-
-		&.tk-clickable {
-			cursor: auto;
-		}
-	}
-
-	.tk-time {
-		color: var(--c-text-3);
-	}
-
-	.tk-content {
-		margin-top: 0;
-	}
-
-	.tk-comments-title, .tk-nick > strong {
-		font-family: var(--font-creative);
-	}
-
-	.tk-owo-emotion {
-		width: auto;
-		height: 1.4em;
-		vertical-align: text-bottom;
-	}
-
-	.tk-extras, .tk-footer {
-		font-size: 0.7em;
-		color: var(--c-text-3);
-	}
-
-	.tk-replies:not(.tk-replies-expand) {
-		mask-image: linear-gradient(to top, transparent, #FFF 4em);
-	}
-
-	.tk-expand {
-		border-radius: 0.5em;
-		transition: background-color 0.1s;
-	}
-
-	.tippy-svg-arrow > svg {
-		fill: inherit;
-		width: auto;
-		height: auto;
-	}
-}
-
-:deep(:where(.tk-preview-container,.tk-content)) {
-	pre {
-		overflow: auto;
-		border-radius: 0.5em;
-		font-size: 0.85em;
-	}
-
-	p {
-		margin: 0.2em 0;
-	}
-
-	img {
-		border-radius: 0.5em;
-	}
-
-	menu, ol, ul {
-		margin: 0.5em 0;
-		padding-inline-start: 1.5em;
-		font-size: 0.9rem;
-		list-style: revert;
-
-		> li {
-			margin: 0.2em 0;
-
-			&::marker {
-				color: var(--c-primary);
-			}
-		}
-	}
-
-	blockquote {
-		margin: 0.5em 0;
-		padding: 0.2em 0.5em;
-		border-inline-start: 4px solid var(--c-border);
-		border-radius: 4px;
-		background-color: var(--c-bg-2);
-		font-size: 0.9em;
-	}
+	min-height: 200px;
 }
 </style>

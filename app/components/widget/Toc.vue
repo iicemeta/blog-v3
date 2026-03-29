@@ -23,7 +23,7 @@ function hasHeading(tocTree: TocLink, heading?: string): boolean {
 			<Icon name="ph:arrow-circle-up-bold" />
 		</a>
 
-		<a href="#twikoo" aria-label="评论区">
+		<a href="#giscus" aria-label="评论区">
 			<Icon name="ph:chat-circle-text-bold" />
 		</a>
 	</template>
