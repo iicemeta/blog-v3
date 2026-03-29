@@ -74,10 +74,8 @@ const blogConfig = {
 
 	/** 向 <head> 中添加脚本 */
 	scripts: [
-		// 自己部署的 Umami 统计服务
-		{ 'src': 'https://zhi.zhilu.site/zhi.js', 'data-website-id': 'a1997c81-a42b-46f6-8d1d-8fbd67a8ef41', 'defer': true },
-		// 自己网站的 Cloudflare Insights 统计服务
-		{ 'src': 'https://static.cloudflareinsights.com/beacon.min.js', 'data-cf-beacon': '{"token": "97a4fe32ed8240ac8284e9bffaf03962"}', 'defer': true },
+		// 统计和监控脚本可以在这里添加
+		// 例如：Umami、Google Analytics、Cloudflare Insights 等
 	],
 
 	/** Giscus 评论系统配置
@@ -94,7 +92,7 @@ const blogConfig = {
 		emitMetadata: '0',
 		inputPosition: 'bottom',
 		theme: 'preferred_color_scheme',
-		lang: 'zh-TW',
+		lang: 'zh-CN',
 		loading: 'lazy',
 	},
 }
