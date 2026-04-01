@@ -61,17 +61,17 @@ const giscusConfig = computed(() => {
 	const cfg = appConfig.giscus
 	if (!cfg) return null
 	return {
-		repo: cfg.repo || '',
+		repo: (cfg.repo || 'owner/repo') as `${string}/${string}`,
 		repoId: cfg.repoId || '',
 		category: cfg.category || 'Announcements',
 		categoryId: cfg.categoryId || '',
-		mapping: cfg.mapping || 'pathname',
-		strict: cfg.strict || '0',
-		reactionsEnabled: cfg.reactionsEnabled || '1',
-		emitMetadata: cfg.emitMetadata || '0',
-		inputPosition: cfg.inputPosition || 'bottom',
+		mapping: (cfg.mapping || 'pathname') as 'pathname' | 'url' | 'title' | 'og:title' | 'specific' | 'number',
+		strict: (cfg.strict || '0') as '0' | '1',
+		reactionsEnabled: (cfg.reactionsEnabled || '1') as '0' | '1',
+		emitMetadata: (cfg.emitMetadata || '0') as '0' | '1',
+		inputPosition: (cfg.inputPosition || 'bottom') as 'top' | 'bottom',
 		lang: cfg.lang || 'zh-CN',
-		loading: cfg.loading || 'lazy',
+		loading: (cfg.loading || 'lazy') as 'eager' | 'lazy',
 	}
 })
 </script>

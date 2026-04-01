@@ -1,8 +1,8 @@
 ---
 title: 欢迎来到我的博客
-description: 讲述关于欢迎来到我的博客的故事，并根据博客、Nuxt、生活给出杂谈。
-date: 2025-03-29 14:30:00
-updated: 2025-03-29 14:30:00
+description: 这是一篇用AI写的示例文章，目的是为了占位展示。
+date: 2026-03-29 14:30:00
+updated: 2026-03-29 14:30:00
 image: https://picsum.photos/1200/600?random=1
 categories: [杂谈]
 tags: [博客, Nuxt, 生活]
