@@ -37,3 +37,4 @@ steps:
   displayName: 'Deploy to Cloudflare Pages'
   env:
     CLOUDFLARE_API_TOKEN: $(CLOUDFLARE_API_TOKEN)
+    CLOUDFLARE_ACCOUNT_ID: $(CLOUDFLARE_ACCOUNT_ID)
