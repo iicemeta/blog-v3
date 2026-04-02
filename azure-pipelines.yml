@@ -1,5 +1,5 @@
 # Node.js
-# Build a general Node.js project with npm.
+# Build a general Node.js project with pnpm.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
@@ -10,12 +10,30 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+# 安装 Node.js 22.18.0
 - task: NodeTool@0
   inputs:
-    versionSpec: '20.x'
-  displayName: 'Install Node.js'
+    versionSpec: '22.18.0'
+  displayName: 'Install Node.js 22.18.0'
 
+# 安装 pnpm
 - script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+    npm install -g pnpm@10.32.1
+  displayName: 'Install pnpm'
+
+# 安装依赖
+- script: |
+    pnpm install
+  displayName: 'pnpm install'
+
+# 构建项目（静态生成）
+- script: |
+    pnpm generate
+  displayName: 'pnpm generate'
+
+# 部署到 Cloudflare Pages
+- script: |
+    npx wrangler pages deploy ./dist --project-name=blog-v3 --branch=main
+  displayName: 'Deploy to Cloudflare Pages'
+  env:
+    CLOUDFLARE_API_TOKEN: $(CLOUDFLARE_API_TOKEN)
