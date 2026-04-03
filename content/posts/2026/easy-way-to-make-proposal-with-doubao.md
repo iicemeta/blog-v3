@@ -36,15 +36,30 @@ tags: [豆包, AI助手]
 
 1. 点击右上角设置
 
-![trae程序截图-设置按钮](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image.png
+caption: trae程序截图-设置按钮
+---
+::
 
 2. 在左侧找到智能体
 
-![trae程序截图-智能体](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-1.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-1.png
+caption: trae程序截图-智能体
+---
+::
 
 3. 点击右上角创建按钮
 
-![trae程序截图-智能体-创建](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-2.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-2.png
+caption: trae程序截图-智能体-创建
+---
+::
 
 4. 填入Prompt
 
@@ -52,23 +67,48 @@ tags: [豆包, AI助手]
 
 `名称` 和 `内容` 可以直接复制
 
-![trae程序截图-智能体-创建-详情页](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-3.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-3.png
+caption: trae程序截图-智能体-创建-详情页
+---
+::
 
 ***可选*** 如果你需要可被其他智能体调用，则需要填写 `description`
 
-![trae程序截图-智能体-创建-详情页2](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-4.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-4.png
+caption: trae程序截图-智能体-创建-详情页2
+---
+::
 
 #### 开始对话
 
 此时回到对话框，点击这个位置并选择刚才创建的智能体
 
-![trae程序截图-对话-智能体选择](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-5.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-5.png
+caption: trae程序截图-对话-智能体选择
+---
+::
 
-![trae程序截图-对话-智能体选择2](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-6.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-6.png
+caption: trae程序截图-对话-智能体选择2
+---
+::
 
 出现这样的界面你就可以开始对话了！
 
-![trae程序截图-对话-准备对话](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-7.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-7.png
+caption: trae程序截图-对话-准备对话
+---
+::
 
 例如我们想举办一个春日书会，让同学们推荐自己读过的书。
 
@@ -78,7 +118,12 @@ tags: [豆包, AI助手]
 如果你直接发送这样的提示词，AI不知道你要在什么时候举办，面向对象是谁，所以会向你提问。
 ::
 
-![trae程序截图-对话-对话1](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-8.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-8.png
+caption: trae程序截图-对话-对话1
+---
+::
 
 ::alert{type="tip" title="优化后"}
 > 现在正是春暖花开好时节，我想举办一个春日读书会，让同学们来推荐自己读过的喜欢的书。今天是2026.04.01，我计划在2周后的晚自习举办这个活动，时间19:00-20:30，面向全校学生，活动地点在A123教室，我们社团是"青柚书会"。
@@ -86,7 +131,12 @@ tags: [豆包, AI助手]
 现在，让我们重新创建一个对话。
 :: 
 
-![trae程序截图-对话-对话2](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-9.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-9.png
+caption: trae程序截图-对话-对话2
+---
+::
 
 如图，这时，AI为我们生成了整份策划书。
 
@@ -160,25 +210,50 @@ A123教室
 
 一键跳转 [Prompt](#智能体prompt) 复制
 
-![使用提示词创建SKILL.md文件](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-10.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-10.png
+caption: 使用提示词创建SKILL.md文件
+---
+::
 
 打开豆包网页，新建一个对话
 
-![网页-豆包-新对话](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-11.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-11.png
+caption: 网页-豆包-新对话
+---
+::
 
 在这里上传刚才创建的 `SKILL.md` 文件
 
-![网页-豆包-上传文件](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-12.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-12.png
+caption: 网页-豆包-上传文件
+---
+::
 
 然后将需要创建的活动的提示词填入。
 
 > 现在正是春暖花开好时节，我想举办一个春日读书会，让同学们来推荐自己读过的喜欢的书。今天是2026.04.01，我计划在2周后的晚自习举办这个活动，时间19:00-20:30，面向全校学生，活动地点在A123教室，我们社团是“青柚书会”。
 
-![网页-豆包-填写提示词](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-13.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-13.png
+caption: 网页-豆包-填写提示词
+---
+::
 
 现在我们就可以发送了，为了生成的内容更加优质，我这里开启了思考模式。
 
-![网页-豆包-生成成功](https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-14.png)
+::pic
+---
+src: https://postpic.iicemeta.com/easy-way-to-make-proposal-with-doubao/image-14.png
+caption: 网页-豆包-生成成功
+---
+::
 
 以下就是豆包生成的策划书内容了，你可以直接应用或继续对话做一些详细的修改！~
 
