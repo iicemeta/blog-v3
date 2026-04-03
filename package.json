@@ -23,7 +23,9 @@
     "init-project": "tsx scripts/init-project",
     "new": "tsx scripts/new-blog",
     "check:feed": "tsx scripts/framework/get-feed",
-    "check:feed/all": "tsx scripts/framework/check-all-feeds"
+    "check:feed/all": "tsx scripts/framework/check-all-feeds",
+    "pages:generate": "pnpm prepare && pnpm generate",
+    "pages:deploy": "wrangler pages deploy ./dist --project-name=blog-v3 --branch=main"
   },
   "dependencies": {
     "@bikariya/image-viewer": "catalog:ui",
