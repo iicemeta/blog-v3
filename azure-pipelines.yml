@@ -4,7 +4,7 @@ trigger:
 # 使用你在 Azure DevOps 创建的私有池（比如 Default 或 SelfHosted）
 pool:
   name: Default
-  demands: agent.name -equals metavm   # 可选，指定具体代理
+  demands: agent.name -equals Tiny11basic   # 可选，指定具体代理
 
 steps:
 # 安装 Node.js 22.18.0
