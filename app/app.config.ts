@@ -109,9 +109,9 @@ export default defineAppConfig({
 		{
 			title: '',
 			items: [
-				{ icon: 'ph:files-bold', text: '文章', url: '/' },
-				{ icon: 'ph:link-bold', text: '友链', url: '/link' },
-				{ icon: 'ph:archive-bold', text: '归档', url: '/archive' },
+				{ icon: 'tabler:files', text: '文章', url: '/' },
+				{ icon: 'tabler:link', text: '友链', url: '/link' },
+				{ icon: 'tabler:archive', text: '归档', url: '/archive' },
 			],
 		},
 	] satisfies Nav,
@@ -126,15 +126,15 @@ export default defineAppConfig({
 
 	themes: {
 		light: {
-			icon: 'ph:sun-bold',
+			icon: 'tabler:sun',
 			tip: '浅色模式',
 		},
 		system: {
-			icon: 'ph:monitor-bold',
+			icon: 'tabler:device-desktop',
 			tip: '跟随系统',
 		},
 		dark: {
-			icon: 'ph:moon-bold',
+			icon: 'tabler:moon',
 			tip: '深色模式',
 		},
 	},

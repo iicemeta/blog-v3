@@ -20,7 +20,7 @@ function hasHeading(tocTree: TocLink, heading?: string): boolean {
 		<span class="title">文章目录</span>
 		<!-- use <a> for anchor -->
 		<a href="#main-content" aria-label="返回开头">
-			<Icon name="ph:arrow-circle-up-bold" />
+			<Icon name="tabler:arrow-bar-to-up" />
 		</a>
 
 		<a href="#giscus" aria-label="评论区">
