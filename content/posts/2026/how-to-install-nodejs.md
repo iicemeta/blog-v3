@@ -1,5 +1,5 @@
 ---
-title: 【Node.js】安装与使用
+title: 【Node.js】安装教程
 description: Node.js 是目前 AI 时代不可或缺的工具之一，拥有丰富的组件库和众多 Agent 工具。
 date: 2026-09-14 20:22:00
 updated: 2026-09-14 20:22:00
