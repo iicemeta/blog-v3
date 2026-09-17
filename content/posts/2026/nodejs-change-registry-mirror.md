@@ -4,7 +4,7 @@ description: 在进行前端开发或 Node.js 后端项目时，我们经常需�
 date: 2026-09-15 10:00:00
 updated: 2026-09-15 10:00:00
 image: https://postpic.iicemeta.com/nodejs-change-registry-mirror/Gemini_Generated_Image_6em6g76em6g76em6.jpg
-categories: [工具]
+categories: [技术]
 tags: [Node.js, 教程, AI, 基础工具]
 ---
 
@@ -30,6 +30,8 @@ caption: 阿里云NPM镜像源官网
 ::
 
 接下来 **右键** 点击 **Windows 徽标** 或按 :key{code="Win"} + :key{code="X"} 打开菜单，然后启动 **Windows Powershell**
+
+在最新版Windows中，这里也叫做 **终端**
 
 ::pic
 ---

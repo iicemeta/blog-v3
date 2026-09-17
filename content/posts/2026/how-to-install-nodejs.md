@@ -4,7 +4,7 @@ description: Node.js 是目前 AI 时代不可或缺的工具之一，拥有丰�
 date: 2026-09-14 20:22:00
 updated: 2026-09-14 20:22:00
 image: https://postpic.iicemeta.com/how-to-install-nodejs/Gemini_Generated_Image_z5xa9dz5xa9dz5xa.jpg
-categories: [工具]
+categories: [技术]
 tags: [Node.js, 教程, AI, 基础工具]
 ---
 
@@ -150,6 +150,8 @@ caption: Windows 桌面
 
 点击 **Windows Powershell**
 
+在最新版Windows中，这里也叫做 **终端**
+
 ::pic
 ---
 src: https://postpic.iicemeta.com/how-to-install-nodejs/image-13.png
@@ -183,6 +185,8 @@ caption: 执行 node -v
 
 ::alert{type="warning" title="可能出现的问题"}
 如果出现 **Windows Powershell 禁止运行脚本** 的提示，需要执行以下设置步骤。如果未出现此内容可跳过。
+
+在最新版Windows中，这里也叫做 **终端**
 ::
 
 ::pic
