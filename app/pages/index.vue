@@ -7,10 +7,7 @@ useSeoMeta({
 	ogImage: appConfig.author.avatar,
 })
 
-const layoutStore = useLayoutStore()
-layoutStore.setAside(['blog-stats', 'blog-tech', 'blog-now'])
-
-const { data: listRaw } = await useAsyncData('index_posts', () => useArticleIndexOptions(), { default: () => [] })
+const { data: listRaw } = await useAsyncData('posts:index', () => getArticleIndexOptions(), { default: () => [] })
 const { listSorted, isAscending, sortOrder } = useArticleSort(listRaw, { bindDirectionQuery: 'asc', bindOrderQuery: 'sort' })
 const { category, categories, listCategorized } = useCategory(listSorted, { bindQuery: 'category' })
 const { page, totalPages, listPaged } = usePagination(listCategorized, { bindQuery: 'page' })
@@ -26,9 +23,20 @@ const listRecommended = computed(() => orderBy(
 	['recommend', 'date'],
 	['desc'],
 ))
+
+const { data: previewCount } = useAsyncData(
+	'previews:count',
+	() => queryCollection('content').where('stem', 'LIKE', 'previews/%').count(),
+)
 </script>
 
 <template>
+<template #aside>
+	<WidgetBlogStats />
+	<WidgetBlogTech />
+	<WidgetBlogNow />
+</template>
+
 <BlogHeader class="mobile-only" to="/" tag="h1" />
 
 <UtilHydrateSafe>
@@ -42,7 +50,7 @@ const listRecommended = computed(() => orderBy(
 			:categories
 		>
 			<ZSecret>
-				<UtilLink to="/preview" class="preview-entrance">
+				<UtilLink v-if="previewCount" to="/preview" class="preview-entrance">
 					<Icon name="tabler:shield-lock" />
 					查看预览文章
 				</UtilLink>

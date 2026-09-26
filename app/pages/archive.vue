@@ -14,13 +14,10 @@ const showTuning = ref(false)
 const spacing = ref(0)
 const column = ref(1)
 
-const layoutStore = useLayoutStore()
-layoutStore.setAside(['blog-stats', 'blog-log'])
-
 const tuningRef = useTemplateRef('tuning-panel')
 useAvoidTarget(tuningRef, showTuning)
 
-const { data: listRaw } = await useAsyncData('index_posts', () => useArticleIndexOptions(), { default: () => [] })
+const { data: listRaw } = await useAsyncData('posts:index', () => getArticleIndexOptions(), { default: () => [] })
 const { listSorted, isAscending, sortOrder } = useArticleSort(listRaw)
 const { category, categories, listCategorized } = useCategory(listSorted)
 
@@ -48,6 +45,11 @@ function getArticleYear(article: ArticleProps) {
 </script>
 
 <template>
+<template #aside>
+	<WidgetBlogStats />
+	<WidgetBlogLog />
+</template>
+
 <div class="archive proper-height">
 	<PostOrderToggle
 		v-model:is-ascending="isAscending"
@@ -78,7 +80,7 @@ function getArticleYear(article: ArticleProps) {
 				{{ year }}
 			</h2>
 
-			<div class="archive-age">
+			<div v-if="birthYear" class="archive-age">
 				<span>{{ Number(year) - birthYear }}</span>
 				<span class="age-label">岁</span>
 			</div>
@@ -95,6 +97,7 @@ function getArticleYear(article: ArticleProps) {
 				:key="article.path"
 				v-bind="article"
 				:to="article.path"
+				:show-category="column < 3"
 				:use-updated="sortOrder === 'updated'"
 				:style="getFixedDelay(index * 0.03)"
 			/>

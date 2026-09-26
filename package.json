@@ -1,29 +1,30 @@
 {
   "name": "clarity",
   "type": "module",
-  "version": "3.7.0-alpha.3",
+  "version": "3.7.2",
   "private": true,
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@12.3.4",
+  "license": "(MIT OR CC-BY-NC-SA-4.0)",
   "homepage": "https://github.com/L33Z22L11/blog-v3",
   "engines": {
-    "node": ">=22.18 <23 || >=23.6 <24 || >=24",
+    "node": "^22.19 || ^24.11 || >=26",
     "pnpm": ">=10"
   },
   "scripts": {
-    "prepare": "pnpm clean && nuxt prepare",
-    "clean": "rimraf .data node_modules/.cache",
-    "dev": "nuxt dev --open",
+    "prepare": "pnpm clean:cache && nuxt prepare",
+    "clean:cache": "rimraf .data node_modules/.cache",
+    "dev": "nuxt dev",
     "dev:host": "nuxt dev --host",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "bump": "pnpx taze -w && rimraf pnpm-lock.yaml && pnpm update && pnpm dedupe",
+    "bump": "pnpx taze -w && pnpm clean --lockfile && pnpm install",
     "lint": "eslint && stylelint '**/*.{vue,scss}'",
     "lint:fix": "eslint --fix && stylelint '**/*.{vue,scss}' --fix",
-    "init-project": "tsx scripts/init-project",
-    "new": "tsx scripts/new-blog",
-    "check:feed": "tsx scripts/framework/get-feed",
-    "check:feed/all": "tsx scripts/framework/check-all-feeds",
+    "init-project": "unrun scripts/init-project.ts",
+    "new": "unrun scripts/new-blog.ts",
+    "check:feed": "unrun scripts/framework/get-feed.ts",
+    "check:feed/all": "unrun scripts/framework/check-all-feeds.ts",
     "pages:generate": "pnpm prepare && pnpm generate",
     "pages:deploy": "wrangler pages deploy ./dist --project-name=blog-v3 --branch=main"
   },
@@ -49,6 +50,7 @@
     "embla-carousel-vue": "catalog:ui",
     "embla-carousel-wheel-gestures": "catalog:ui",
     "es-toolkit": "catalog:util",
+    "mermaid": "catalog:content",
     "minisearch": "catalog:util",
     "nuxt": "catalog:framework",
     "parse-domain": "catalog:util",
@@ -69,6 +71,7 @@
     "@iconify-json/line-md": "catalog:ui",
     "@iconify-json/ri": "catalog:ui",
     "@iconify-json/simple-icons": "catalog:ui",
+    "@iconify-json/tabler": "catalog:ui",
     "@nuxt/a11y": "catalog:quality",
     "@nuxt/hints": "catalog:quality",
     "@zinkawaii/stylelint-config": "catalog:quality",
@@ -85,8 +88,8 @@
     "sass-embedded": "catalog:framework",
     "strip-ansi": "catalog:util",
     "stylelint": "catalog:quality",
-    "tsx": "catalog:framework",
     "typescript": "catalog:framework",
-    "unplugin-yaml": "catalog:framework"
+    "unplugin-yaml": "catalog:framework",
+    "unrun": "catalog:framework"
   }
 }

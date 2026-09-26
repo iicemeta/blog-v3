@@ -32,7 +32,7 @@ const blogConfig = {
 
 	article: {
 		categories: {
-			[basicConfig.defaultCategory]: { icon: 'tabler:folder-open' },
+			[basicConfig.defaultCategory]: { icon: 'tabler:circle-dashed' },
 			/** 实践可复用操作经验：工具/系统/部署/排障 */
 			技术: { icon: 'tabler:mouse', color: '#33aaff' },
 			/** 编程：代码实现/工程实践/开发方法 */
@@ -44,7 +44,6 @@ const blogConfig = {
 			/** 记录叙事：个人经历/校园家庭/日常片段 */
 			生活: { icon: 'tabler:leaf', color: '#ff7777' },
 		},
-		defaultCategoryIcon: 'tabler:folder',
 		/** 文章版式，首个为默认版式 */
 		types: {
 			tech: {},
@@ -77,6 +76,16 @@ const blogConfig = {
 		// 统计和监控脚本可以在这里添加
 		// 例如：Umami、Google Analytics、Cloudflare Insights 等
 	],
+
+	/** 文章统计配置 */
+	stats: {
+		/**
+		 * 统计范围，匹配 content 下不含扩展名的路径（stem）；空数组统计全部内容
+		 * 使用 SQL LIKE 语法：% 匹配任意长度字符，_ 匹配单个字符
+		 * 多个范围取并集，如 ['posts/%', 'book/%']
+		 */
+		includePaths: [] as string[],
+	},
 
 	/** Giscus 评论系统配置
 	 * 请访问 https://giscus.app/zh-CN 获取你的配置

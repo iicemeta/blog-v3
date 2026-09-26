@@ -7,6 +7,7 @@ const archIcons = {
 	'EdgeOne': 'simple-icons:cloudnativebuild', // 不准确
 	'Express': 'simple-icons:express',
 	'Fly': 'tabler:air-balloon',
+	'Framer': 'simple-icons:framer',
 	'Ghost': 'simple-icons:ghost',
 	'GitHub Pages': 'simple-icons:github',
 	'Golang': 'simple-icons:go',
@@ -19,6 +20,7 @@ const archIcons = {
 	'Material for MkDocs': 'simple-icons:materialformkdocs',
 	'Netlify': 'simple-icons:netlify',
 	'Next.js': 'simple-icons:nextdotjs',
+	'Notion': 'simple-icons:notion',
 	'NotionNext': 'simple-icons:notion',
 	'Nuxt': 'simple-icons:nuxt',
 	'PHP': 'simple-icons:php',
@@ -59,11 +61,13 @@ export const ciIcons: Record<string, string> = {
 const mainDomainIcons: Record<string, string> = {
 	'bilibili.com': 'ri:bilibili-fill',
 	'creativecommons.org': 'ri:creative-commons-line',
+	'feishu.cn': 'icon-park-outline:new-lark',
 	'github.com': 'ri:github-fill',
 	'github.io': 'ri:github-fill',
 	'google.cn': 'ri:google-fill',
 	'google.com': 'ri:google-fill',
 	'jd.com': 'arcticons:jd-sports',
+	'larkoffice.com': 'icon-park-outline:new-lark',
 	'microsoft.com': 'ri:microsoft-fill',
 	'netlify.app': 'simple-icons:netlify',
 	'pages.dev': 'simple-icons:cloudflare',
@@ -81,6 +85,7 @@ const mainDomainIcons: Record<string, string> = {
 // @keep-sorted
 export const domainIcons: Record<string, string> = {
 	'developer.mozilla.org': 'simple-icons:mdnwebdocs',
+	'h5.qzone.qq.com': 'simple-icons:qzone',
 	'mp.weixin.qq.com': 'ri:wechat-fill',
 }
 
@@ -182,6 +187,7 @@ const ext2lang: Record<string, string> = {
 	'md': 'catppuccin:markdown',
 	'mdc': 'catppuccin:markdown',
 	'mdx': 'catppuccin:markdown',
+	'mermaid': 'catppuccin:mermaid',
 	'mmd': 'catppuccin:mermaid',
 	'powershell': 'catppuccin:powershell',
 	'ps': 'catppuccin:powershell',

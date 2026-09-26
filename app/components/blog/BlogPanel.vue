@@ -1,6 +1,10 @@
 <script setup lang="ts">
+defineProps<{
+	hasAside?: boolean
+}>()
+
 const layoutStore = useLayoutStore()
-const { asideWidgets, avoidTargets } = storeToRefs(layoutStore)
+const { avoidTargets } = storeToRefs(layoutStore)
 
 const panelRef = useTemplateRef('blog-panel')
 const { transform } = useAvoidTransform(panelRef, avoidTargets)
@@ -11,10 +15,10 @@ const { transform } = useAvoidTransform(panelRef, avoidTargets)
 	id="blog-panel"
 	ref="blog-panel"
 	:class="{ 'has-active': layoutStore.state !== 'none' }"
-	:style="{ '--transform': transform }"
+	:style="{ transform }"
 >
 	<button
-		v-if="asideWidgets.length"
+		v-if="hasAside"
 		class="toggle-aside widescreen-only"
 		:class="{ active: layoutStore.state === 'aside' }"
 		aria-label="切换侧边栏"
@@ -45,7 +49,6 @@ const { transform } = useAvoidTransform(panelRef, avoidTargets)
 	background-color: var(--c-bg-a50);
 	backdrop-filter: blur(0.5rem);
 	font-size: 1.4rem;
-	transform: var(--transform);
 	transition: transform 0.1s;
 	z-index: var(--z-index-popover);
 
