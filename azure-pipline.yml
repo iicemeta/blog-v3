@@ -1,0 +1,36 @@
+trigger:
+  branches:
+    include:
+    - main
+stages:
+- stage: __default
+  jobs:
+  - job: Job
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '24.21.0'
+      displayName: 'Install Node.js 24.21.0'
+    - task: CmdLine@2
+      displayName: 'Setup pnpm'
+      inputs:
+        script: |
+          npm install --global corepack@latest
+          corepack enable
+          corepack prepare pnpm@latest --activate
+    - task: CmdLine@2
+      displayName: 'pnpm install and generate'
+      inputs:
+        script: |
+          pnpm install
+          pnpm prepare
+          pnpm generate
+    - task: CmdLine@2
+      displayName: 'Deploy to Azure Static Web Apps via SWA CLI'
+      env:
+        AZURE_STATIC_WEBAPP_TOKEN: $(AZURE_STATIC_WEBAPP_TOKEN)
+      inputs:
+        script: |
+          npx @azure/static-web-apps-cli deploy ./dist --deployment-token $(AZURE_STATIC_WEBAPP_TOKEN) --env production
