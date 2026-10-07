@@ -3,7 +3,6 @@ import type { TippyComponent } from 'vue-tippy'
 import Giscus from '@giscus/vue'
 
 const appConfig = useAppConfig()
-const colorMode = useColorMode()
 
 const commentEl = useTemplateRef('comment')
 const popoverEl = useTemplateRef<TippyComponent>('popover')
@@ -17,6 +16,9 @@ const popoverBind = ref<TippyComponent['$props']>({})
 useEventListener(commentEl, 'click', (e) => {
 	if (!(e.target instanceof Element))
 		return
+
+	if (e.target.matches('.tk-avatar-img'))
+		e.stopPropagation()
 
 	const popoverTarget = e.target.closest('a[target="_blank"]')
 	if (!(popoverTarget instanceof HTMLAnchorElement))
@@ -50,16 +52,17 @@ function confirmOpen() {
 	window.open(popoverInputEl.value?.textContent, '_blank')
 }
 
-// Giscus 使用自定义主题
-// 通过 CSS 变量覆盖 Giscus 默认样式
+/* ========== fork: Giscus ========== */
+
+// Giscus 使用自定义主题，通过 CSS 变量覆盖默认样式
 const giscusTheme = computed(() => {
 	return 'custom'
 })
 
-// Giscus 配置
 const giscusConfig = computed(() => {
 	const cfg = appConfig.giscus
-	if (!cfg) return null
+	if (!cfg)
+		return null
 	return {
 		repo: (cfg.repo || 'owner/repo') as `${string}/${string}`,
 		repoId: cfg.repoId || '',
@@ -120,7 +123,12 @@ const giscusConfig = computed(() => {
 		</template>
 	</Tooltip>
 
-	<!-- Giscus 评论系统 -->
+	<!-- 上游 Twikoo 挂载点（本 fork 使用 Giscus，由下方样式隐藏，保留以便合并） -->
+	<div id="twikoo">
+		<p>评论加载中...</p>
+	</div>
+
+	<!-- fork: Giscus 评论系统 -->
 	<ClientOnly>
 		<div id="giscus" class="giscus-container">
 			<Giscus
@@ -143,7 +151,7 @@ const giscusConfig = computed(() => {
 </section>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .z-comment {
 	margin: 3rem 1rem;
 
@@ -176,19 +184,138 @@ const giscusConfig = computed(() => {
 	}
 }
 
-.giscus-container {
+:deep(#twikoo) {
 	margin: 2em 0;
-	min-height: 200px;
+
+	.tk-admin-container {
+		position: fixed;
+		z-index: calc(var(--z-index-popover) + 1);
+	}
+
+	.tk-input {
+		font-family: var(--font-monospace);
+	}
+
+	.tk-avatar {
+		border-radius: 50%;
+
+		@supports (corner-shape: squircle) {
+			corner-shape: superellipse(1.2);
+		}
+	}
+
+	.tk-avatar.tk-clickable {
+		cursor: auto;
+	}
+
+	.tk-time {
+		color: var(--c-text-3);
+	}
+
+	/* 防止 a 被 overflow hidden */
+	.tk-content {
+		margin: -0.2em;
+		padding: 0.2em;
+	}
+
+	.tk-comments-title, .tk-nick {
+		font-family: var(--font-creative);
+	}
+
+	.tk-owo-emotion {
+		width: auto;
+		height: 1.4em;
+		vertical-align: text-bottom;
+	}
+
+	.tk-extras, .tk-footer {
+		font-size: 0.7em;
+		color: var(--c-text-3);
+	}
+
+	.tk-replies:not(.tk-replies-expand) {
+		mask-image: linear-gradient(to top, transparent, #FFF 4em);
+	}
+
+	.tk-expand {
+		border-radius: 0.5em;
+		transition: background-color 0.1s;
+	}
+
+	.tippy-svg-arrow > svg {
+		fill: inherit;
+		width: auto;
+		height: auto;
+	}
+}
+
+:deep(:where(.tk-preview-container,.tk-content)) {
+	pre {
+		overflow: auto;
+		border-radius: 0.5em;
+		font-size: 0.85em;
+	}
+
+	a {
+		margin: -0.1em -0.2em;
+		padding: 0.1em 0.2em;
+		background: linear-gradient(var(--c-primary-soft), var(--c-primary-soft)) no-repeat center bottom / 100% 0.1em;
+		color: var(--c-primary);
+		transition: all 0.2s;
+
+		&:hover {
+			border-radius: 0.3em;
+			background-size: 100% 100%;
+		}
+	}
+
+	p {
+		margin: 0.2em 0;
+	}
+
+	img {
+		border-radius: 0.5em;
+	}
+
+	menu, ol, ul {
+		margin: 0.5em 0;
+		padding-inline-start: 1.5em;
+		font-size: 0.9rem;
+		list-style: revert;
+
+		> li {
+			margin: 0.2em 0;
+
+			&::marker {
+				color: var(--c-primary);
+			}
+		}
+	}
+
+	blockquote {
+		margin: 0.5em 0;
+		padding: 0.2em 0.5em;
+		border-inline-start: 4px solid var(--c-border);
+		border-radius: 4px;
+		background-color: var(--c-bg-2);
+		font-size: 0.9em;
+	}
 }
 </style>
 
-<style lang="scss">
-// Giscus 自定义主题样式
-// 这些样式需要全局生效，所以不使用 scoped
+<style scoped>
+/* ========== fork: Giscus 主题 ========== */
 
-// 自定义主题 CSS 变量
+/* 隐藏上游 Twikoo 挂载点 */
+#twikoo {
+	display: none;
+}
+
 .giscus-container {
-	// 基础颜色
+	min-height: 200px;
+	margin: 2em 0;
+
+	/* 基础颜色 */
 	--color-prettylights-syntax-comment: var(--c-text-3);
 	--color-prettylights-syntax-constant: var(--c-primary);
 	--color-prettylights-syntax-entity: var(--c-primary);
@@ -220,7 +347,7 @@ const giscusConfig = computed(() => {
 	--color-prettylights-syntax-sublimelinter-gutter-mark: var(--c-text-3);
 	--color-prettylights-syntax-constant-other-reference-link: var(--c-primary);
 
-	// 按钮和交互元素
+	/* 按钮和交互元素 */
 	--color-btn-text: var(--c-text-1);
 	--color-btn-bg: var(--c-bg-2);
 	--color-btn-border: var(--c-border);
@@ -235,7 +362,7 @@ const giscusConfig = computed(() => {
 	--color-btn-focus-border: var(--c-primary);
 	--color-btn-focus-shadow: 0 0 0 2px var(--c-primary-soft);
 
-	// 主按钮
+	/* 主按钮 */
 	--color-btn-primary-text: var(--c-bg);
 	--color-btn-primary-bg: var(--c-primary);
 	--color-btn-primary-border: var(--c-primary);
@@ -248,7 +375,7 @@ const giscusConfig = computed(() => {
 	--color-btn-primary-focus-border: var(--c-primary);
 	--color-btn-primary-focus-shadow: 0 0 0 2px var(--c-primary-soft);
 
-	// 输入框
+	/* 输入框 */
 	--color-input-text: var(--c-text-1);
 	--color-input-bg: var(--c-bg);
 	--color-input-border: var(--c-border);
@@ -258,29 +385,29 @@ const giscusConfig = computed(() => {
 	--color-input-focus-border: var(--c-primary);
 	--color-input-focus-shadow: 0 0 0 2px var(--c-primary-soft);
 
-	// 背景
+	/* 背景 */
 	--color-canvas-default: var(--c-bg-1);
 	--color-canvas-overlay: var(--c-bg);
 	--color-canvas-inset: var(--c-bg-2);
 	--color-canvas-subtle: var(--c-bg-2);
 
-	// 边框
+	/* 边框 */
 	--color-border-default: var(--c-border);
 	--color-border-muted: var(--c-bg-2);
 
-	// 文字
+	/* 文字 */
 	--color-fg-default: var(--c-text-1);
 	--color-fg-muted: var(--c-text-2);
 	--color-fg-subtle: var(--c-text-3);
 	--color-fg-on-emphasis: var(--c-bg);
 
-	// 强调色
+	/* 强调色 */
 	--color-accent-fg: var(--c-primary);
 	--color-accent-emphasis: var(--c-primary);
 	--color-accent-muted: var(--c-primary-soft);
 	--color-accent-subtle: var(--c-primary-soft);
 
-	// 成功/警告/错误
+	/* 成功/警告/错误 */
 	--color-success-fg: var(--c-success);
 	--color-success-emphasis: var(--c-success);
 	--color-success-muted: var(--c-success-soft);
@@ -294,7 +421,7 @@ const giscusConfig = computed(() => {
 	--color-danger-muted: var(--c-error-soft);
 	--color-danger-subtle: var(--c-error-soft);
 
-	// 反应按钮
+	/* 反应按钮 */
 	--color-reaction-button-text: var(--c-text-2);
 	--color-reaction-button-bg: var(--c-bg-2);
 	--color-reaction-button-border: var(--c-border);
@@ -303,11 +430,11 @@ const giscusConfig = computed(() => {
 	--color-reaction-button-selected-border: var(--c-primary);
 	--color-reaction-button-selected-text: var(--c-primary);
 
-	// 时间线
+	/* 时间线 */
 	--color-timeline-badge-bg: var(--c-bg-2);
 	--color-timeline-badge-success-border: var(--c-success);
 
-	// 阴影
+	/* 阴影 */
 	--shadow-resting-xsmall: var(--box-shadow-1);
 	--shadow-resting-small: var(--box-shadow-1);
 	--shadow-resting-medium: var(--box-shadow-2);
@@ -316,20 +443,19 @@ const giscusConfig = computed(() => {
 	--shadow-floating-medium: var(--box-shadow-3);
 	--shadow-floating-large: var(--box-shadow-3);
 
-	// 半径
+	/* 半径 */
 	--borderRadius-small: 0.25em;
 	--borderRadius-medium: 0.5em;
 	--borderRadius-large: 0.75em;
 	--borderRadius-xlarge: 1em;
 
-	// 字体
+	/* 字体 */
 	--fontStack-body: var(--font-basic);
 	--fontStack-heading: var(--font-basic);
 }
 
-// 深色模式适配
+/* 深色模式适配 */
 .dark .giscus-container {
-	// 主按钮在深色模式下调整
 	--color-btn-primary-text: var(--c-text);
 	--color-btn-primary-bg: var(--c-primary);
 	--color-btn-primary-hover-bg: hsl(var(--hue-theme) 100% 75%);
