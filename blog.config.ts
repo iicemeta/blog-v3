@@ -39,6 +39,8 @@ const blogConfig = {
 			开发: { icon: 'tabler:code', color: '#7777ff' },
 			/** 安全：漏洞/CTF/恶意软件/安全事件分析 */
 			安全: { icon: 'tabler:bug', color: '#ff7733' },
+			/** 娱乐：游戏教程/玩法记录/游戏日常 */
+			游戏: { icon: 'tabler:device-gamepad-2', color: '#66cc55' },
 			/** 思考：观点讨论/复盘反思/行业或产品观察 */
 			杂谈: { icon: 'tabler:message', color: '#33bbaa' },
 			/** 记录叙事：个人经历/校园家庭/日常片段 */

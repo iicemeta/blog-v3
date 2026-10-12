@@ -45,7 +45,9 @@ tags: [Node.js, 教程]
 | `aside` | `string[]` | `["toc"]` | 侧栏 widget 列表，**未写入 schema**，由页面读取 `post.meta.aside` |
 | `readingTime` | `{ text, minutes, time, words }` | 自动生成 | 由 `remark-reading-time` 注入，不要手写 |
 
-`categories` 的预置值来自 `blog.config.ts` 的 `article.categories`：`未分类`、`技术`、`开发`、`安全`、`杂谈`、`生活`（含图标与颜色）。填其它字符串合法，但会缺少图标/颜色。
+`categories` 的预置值来自 `blog.config.ts` 的 `article.categories`：`未分类`、`技术`、`开发`、`安全`、`游戏`、`杂谈`、`生活`（含图标与颜色）。填其它字符串合法，但会缺少图标/颜色。
+
+> 数组里只有 **第一个元素** 参与展示与筛选：`getCategoryIcon` / `getCategoryColor` 与 `useArticleCategory` 均只读 `categories[0]`（`app/utils/article.ts`、`app/composables/useArticleCategory.ts`）。
 
 ## Supported values
 
